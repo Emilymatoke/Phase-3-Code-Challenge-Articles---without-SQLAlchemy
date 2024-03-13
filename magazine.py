@@ -4,6 +4,10 @@ class Magazine:
         self._category = None
         self.name = name
         self.category = category
+        self._articles = []
+        self._contributors = set()
+
+
 
     @property
     def name(self):
@@ -31,8 +35,35 @@ class Magazine:
             raise ValueError("Category must have at least one character")
         
     def articles(self):
-        return [article for article in self._articles if isinstance(article, Article)]
+        return self._articles
 
     def contributors(self):
-        return list({article.author for article in self._articles if isinstance(article, Article)})
+        return list(self._contributors)
 
+    def article_titles(self):
+        return [article.title for article in self._articles] if self._articles else None
+
+    def contributing_authors(self):
+        authors_count = {}
+        for article in self._articles:
+            author = article.author
+            if author in authors_count:
+                authors_count[author] += 1
+            else:
+                authors_count[author] = 1
+        return [author for author, count in authors_count.items() if count > 2] if authors_count else None
+
+    def add_article(self, author, title):
+        article = author.add_article(self, title)
+        self._articles.append(article)
+        self._contributors.add(author)
+        return article
+
+    @classmethod
+    def top_publisher(cls):
+        all_magazines = cls._all_magazines
+        if all_magazines:
+            return max(all_magazines, key=lambda magazine: len(magazine.articles()))
+        return None
+
+    _all_magazines = set()
