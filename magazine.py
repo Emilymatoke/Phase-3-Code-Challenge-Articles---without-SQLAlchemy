@@ -30,3 +30,9 @@ class Magazine:
         else :
             raise ValueError("Category must have at least one character")
         
+    def articles(self):
+        return [article for article in self._articles if isinstance(article, Article)]
+
+    def contributors(self):
+        return list({article.author for article in self._articles if isinstance(article, Article)})
+
