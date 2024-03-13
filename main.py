@@ -12,7 +12,7 @@ magazine2 = Magazine("Fashion Weekly", "Fashion")
 
 # Add articles
 article1 = author1.add_article(magazine1, "10 Tips for Better Coding")
-article2 = author1.add_article(magazine2, " Winter Fashion Trends for 2024")
+article2 = author1.add_article(magazine2, "Winter Fashion Trends for 2024")
 article3 = author2.add_article(magazine2, "How to Dress for Work")
 
 # Print article details
@@ -40,5 +40,3 @@ if top_publisher:
     print("Top Publisher:", top_publisher.name)
 else:
     print("There are no magazines.")
-                               
-

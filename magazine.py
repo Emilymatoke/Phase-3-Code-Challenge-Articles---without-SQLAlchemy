@@ -7,21 +7,18 @@ class Magazine:
         self._articles = []
         self._contributors = set()
 
-
-
     @property
     def name(self):
         """The name property"""
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, value):
         """Name must be a string between 2 and 16 characters in length"""
-        if isinstance(name, str) and 2 < len(name) > 16 :
-            self._name = name
-        else :
+        if isinstance(value, str) and 2 <= len(value) <= 16:
+            self._name = value
+        else:
             raise ValueError("Name must be between 2 and 16 characters")
-        
 
     @property
     def category(self):
@@ -31,14 +28,8 @@ class Magazine:
     def category(self, category):
         if isinstance(category, str) and len(category) > 0:
             self._category = category
-        else :
+        else:
             raise ValueError("Category must have at least one character")
-        
-    def articles(self):
-        return self._articles
-
-    def contributors(self):
-        return list(self._contributors)
 
     def article_titles(self):
         return [article.title for article in self._articles] if self._articles else None
@@ -66,4 +57,4 @@ class Magazine:
             return max(all_magazines, key=lambda magazine: len(magazine.articles()))
         return None
 
-    _all_magazines = set()
+    _all_magazines = set()  # Assuming this line is correct

@@ -1,29 +1,27 @@
-class Author :
-    def __init__(self, name) :   
+
+
+class Author:
+    def __init__(self, name):
         self.name = name
-        self._name = None
         self._articles = []
 
-        
-
     @property
-    def name(self) :
+    def name(self):
         """The name property"""
-        return self._name 
-    
+        return self._name
+
     @name.setter
-    def name(self, name) :
+    def name(self, name):
         """ Name must be a string longer than 0 characters in length"""
-        if isinstance (name, str) and len(name) > 0 :
+        if isinstance(name, str) and len(name) > 0:
             self._name = name
-        else :
+        else:
             raise ValueError(" Name must be a string longer than 0 characters")
-        
+
     def __setattr__(self, name, value):
-        if hasattr(self, name):
+        if name != "name" and hasattr(self, name):
             raise AttributeError("Attribute '{}' cannot be modified".format(name))
         super().__setattr__(name, value)
-
 
     def articles(self):
         return self._articles
@@ -32,6 +30,7 @@ class Author :
         return list(set(article.magazine for article in self._articles))
 
     def add_article(self, magazine, title):
+        from articles import Article
         article = Article(self, magazine, title)
         self._articles.append(article)
         return article
